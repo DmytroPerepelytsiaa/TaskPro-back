@@ -5,7 +5,7 @@ import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { IsUserExistPipe } from './pipes/is-user-exist.pipe';
 import { LoginUserDto } from './dto/login-user.dto';
-import { IsUserNotExistPipe } from './pipes/is-user-not-exist.pipe';
+import { ValidateLoginPayloadPipe } from './pipes/validate-login-payload.pipe';
 
 @Controller('users')
 export class UsersController {
@@ -23,7 +23,7 @@ export class UsersController {
   }
 
   @Post('login')
-  async login(@Body(IsUserNotExistPipe) body: LoginUserDto): Promise<{ token: string }> {
+  async login(@Body(ValidateLoginPayloadPipe) body: LoginUserDto): Promise<{ token: string }> {
     const token = await this.jwtService.signAsync({ email: body.email });
     return { token };
   }
