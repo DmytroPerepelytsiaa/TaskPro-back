@@ -1,15 +1,30 @@
 import { Controller, Post, Body } from '@nestjs/common';
-import bcrypt from 'bcrypt';
+import * as bcrypt from 'bcrypt';
+import { JwtService } from '@nestjs/jwt';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
+import { IsUserExistPipe } from './pipes/is-user-exist.pipe';
+import { LoginUserDto } from './dto/login-user.dto';
+import { IsUserNotExistPipe } from './pipes/is-user-not-exist.pipe';
 
 @Controller('users')
 export class UsersController {
-  constructor(private readonly usersService: UsersService) {}
+  constructor(
+    private readonly usersService: UsersService,
+    private readonly jwtService: JwtService,
+  ) {}
 
-  @Post()
-  async create(@Body() createUserDto: CreateUserDto) {
-    createUserDto.password = await bcrypt.hash(createUserDto.password, 10);
-    return this.usersService.create();
+  @Post('register')
+  async create(@Body(IsUserExistPipe) body: CreateUserDto): Promise<{ token: string }> {
+    body.password = await bcrypt.hash(body.password, 10);
+    const token = await this.jwtService.signAsync({ email: body.email });
+    await this.usersService.createUser(body);
+    return { token };
+  }
+
+  @Post('login')
+  async login(@Body(IsUserNotExistPipe) body: LoginUserDto): Promise<{ token: string }> {
+    const token = await this.jwtService.signAsync({ email: body.email });
+    return { token };
   }
 }

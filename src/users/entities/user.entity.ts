@@ -1,6 +1,8 @@
-import { Column } from 'typeorm';
+import { Column, Entity } from 'typeorm';
+import { BaseEntity } from 'src/common/entities/base.entity';
 
-export class User {
+@Entity()
+export class UserEntity extends BaseEntity {
   @Column({ length: 36 })
     name: string;
 
@@ -9,4 +11,5 @@ export class User {
 
   @Column()
     password: string;
+
 }

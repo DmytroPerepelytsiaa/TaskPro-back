@@ -1,7 +1,9 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { JwtModule } from '@nestjs/jwt';
 import { UsersModule } from './users/users.module';
-import { User } from './users/entities/user.entity';
+import { UserEntity } from './users/entities/user.entity';
+import { JWT_SECRET } from './common/constants/jwt';
 
 @Module({
   imports: [
@@ -12,8 +14,13 @@ import { User } from './users/entities/user.entity';
       username: 'admin',
       password: 'adminpassword',
       database: 'task-pro',
-      entities: [User],
+      entities: [UserEntity],
       synchronize: true,
+    }),
+    JwtModule.register({
+      global: true,
+      secret: JWT_SECRET,
+      signOptions: { expiresIn: '2d' },
     }),
     UsersModule,
   ],
