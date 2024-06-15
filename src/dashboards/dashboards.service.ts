@@ -15,6 +15,13 @@ export class DashboardsService {
     return this.dashboardRepository.find();
   }
 
+  async updateDashboard(body: DashboardEntity): Promise<DashboardEntity> {
+    const dashboard = await this.dashboardRepository.findOneBy({ id: body.id });
+    
+    Object.assign(dashboard, body);
+    return this.dashboardRepository.save(dashboard);
+  }
+
   createDashboard(body: CreateDashboardDto): Promise<DashboardEntity> {
     return this.dashboardRepository.save(body);
   }

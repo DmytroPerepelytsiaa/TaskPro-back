@@ -3,7 +3,7 @@ import { DashboardBackgrounds, DashboardIcons } from '../models';
 
 export class CreateDashboardDto {
   @IsDefined()
-  @MaxLength(120)
+  @MaxLength(76)
     name: string;
 
   @IsDefined()
