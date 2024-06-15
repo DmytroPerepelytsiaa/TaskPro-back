@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { DeleteResult, Repository } from 'typeorm';
 import { CreateDashboardDto } from './dto/create-dashboard.dto';
 import { DashboardEntity } from './entities/dashboard.entity';
 
@@ -17,5 +17,9 @@ export class DashboardsService {
 
   createDashboard(body: CreateDashboardDto): Promise<DashboardEntity> {
     return this.dashboardRepository.save(body);
+  }
+
+  deleteDashboard(id: number): Promise<DeleteResult> {
+    return this.dashboardRepository.delete(id);
   }
 }
