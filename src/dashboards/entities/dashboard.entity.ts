@@ -12,4 +12,7 @@ export class DashboardEntity extends BaseEntity {
 
   @Column({ type: 'enum', enum: DashboardBackgrounds })
     background: DashboardBackgrounds;
+
+  @Column({ length: 256 })
+    ownerEmail: string;
 }

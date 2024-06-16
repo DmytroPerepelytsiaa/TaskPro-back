@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { ForbiddenException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { DeleteResult, Repository } from 'typeorm';
 import { CreateDashboardDto } from './dto/create-dashboard.dto';
@@ -11,8 +11,8 @@ export class DashboardsService {
     private dashboardRepository: Repository<DashboardEntity>
   ) {}
 
-  getDashboards(): Promise<DashboardEntity[]> {
-    return this.dashboardRepository.find();
+  getDashboards(email: string): Promise<DashboardEntity[]> {
+    return this.dashboardRepository.find({ where: { ownerEmail: email } });
   }
 
   async updateDashboard(body: DashboardEntity): Promise<DashboardEntity> {
@@ -22,11 +22,17 @@ export class DashboardsService {
     return this.dashboardRepository.save(dashboard);
   }
 
-  createDashboard(body: CreateDashboardDto): Promise<DashboardEntity> {
-    return this.dashboardRepository.save(body);
+  createDashboard(body: CreateDashboardDto, email: string): Promise<DashboardEntity> {
+    return this.dashboardRepository.save({ ...body, ownerEmail: email });
   }
 
-  deleteDashboard(id: number): Promise<DeleteResult> {
+  async deleteDashboard(id: number, email: string): Promise<DeleteResult> {
+    const dashboard = await this.dashboardRepository.findOneBy({ id });
+
+    if (dashboard.ownerEmail !== email) {
+      throw new ForbiddenException();
+    }
+
     return this.dashboardRepository.delete(id);
   }
 }
