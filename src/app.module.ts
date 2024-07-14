@@ -6,6 +6,8 @@ import { UserEntity } from './users/entities/user.entity';
 import { JWT_SECRET } from './common/constants/jwt';
 import { DashboardEntity } from './dashboards/entities/dashboard.entity';
 import { DashboardsModule } from './dashboards/dashboards.module';
+import { ColumnsModule } from './columns/columns.module';
+import { ColumnEntity } from './columns/entities/column.entity';
 
 @Module({
   imports: [
@@ -16,7 +18,7 @@ import { DashboardsModule } from './dashboards/dashboards.module';
       username: 'admin',
       password: 'adminpassword',
       database: 'task-pro',
-      entities: [UserEntity, DashboardEntity],
+      entities: [UserEntity, DashboardEntity, ColumnEntity],
       synchronize: false,
     }),
     JwtModule.register({
@@ -26,6 +28,7 @@ import { DashboardsModule } from './dashboards/dashboards.module';
     }),
     UsersModule,
     DashboardsModule,
+    ColumnsModule,
   ],
   controllers: [],
   providers: [],

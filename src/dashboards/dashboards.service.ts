@@ -12,7 +12,7 @@ export class DashboardsService {
   ) {}
 
   getDashboards(email: string): Promise<DashboardEntity[]> {
-    return this.dashboardRepository.find({ where: { ownerEmail: email } });
+    return this.dashboardRepository.find({ where: { ownerEmail: email }, relations: ['columns'] });
   }
 
   async updateDashboard(body: DashboardEntity): Promise<DashboardEntity> {
