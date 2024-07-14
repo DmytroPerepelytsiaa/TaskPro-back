@@ -1,2 +1,2 @@
 export * from './is-dashboard-exist.pipe';
-export * from './user-is-not-owner.pipe';
+export * from './is-user-dashboard-owner.pipe';

@@ -9,7 +9,7 @@ import { UserEntity } from './entities';
 @Controller('api/users')
 export class UsersController {
   constructor(
-    private readonly usersService: UsersService,
+    private usersService: UsersService,
   ) {}
 
   @Post('register')

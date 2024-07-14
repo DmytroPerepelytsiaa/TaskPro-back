@@ -4,12 +4,12 @@ import { DeleteResult } from 'typeorm';
 import { DashboardsService } from './dashboards.service';
 import { DashboardEntity } from './entities';
 import { CreateDashboardDto } from './dto';
-import { IsDashboardExistPipe, UserIsNotOwnerPipe } from './pipes';
+import { IsDashboardExistPipe, IsUserDashboardOwnerPipe } from './pipes';
 
 @Controller('api/dashboards')
 export class DashboardsController {
   constructor (
-    private readonly dashboardsService: DashboardsService,
+    private dashboardsService: DashboardsService,
   ) {}
 
   @UseGuards(AuthGuard)
@@ -26,7 +26,7 @@ export class DashboardsController {
 
   @UseGuards(AuthGuard)
   @Patch(':id')
-  updateDashboard(@Body(IsDashboardExistPipe, UserIsNotOwnerPipe) body: DashboardEntity): Promise<DashboardEntity> {
+  updateDashboard(@Body(IsDashboardExistPipe, IsUserDashboardOwnerPipe) body: DashboardEntity): Promise<DashboardEntity> {
     return this.dashboardsService.updateDashboard(body);
   }
 

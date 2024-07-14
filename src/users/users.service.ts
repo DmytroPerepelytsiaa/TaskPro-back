@@ -10,7 +10,7 @@ import { CreateUserDto } from './dto';
 export class UsersService {
   constructor (
     @InjectRepository(UserEntity) private userRepository: Repository<UserEntity>,
-    private readonly jwtService: JwtService,
+    private jwtService: JwtService,
   ) {}
 
   async createUser(body: CreateUserDto): Promise<UserEntity> {
