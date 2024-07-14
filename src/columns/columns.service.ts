@@ -1,7 +1,7 @@
-import { Injectable } from '@nestjs/common';
+import { ForbiddenException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { DashboardEntity } from '@dashboards/entities';
-import { Repository } from 'typeorm';
+import { DeleteResult, Repository } from 'typeorm';
 import { CreateColumnDto } from './dto';
 import { ColumnEntity } from './entities';
 
@@ -16,5 +16,19 @@ export class ColumnsService {
     const dashboard = await this.dashboardRepository.findOneBy({ id: body.dashboardId });
 
     return this.columnRepository.save({ name: body.name, dashboard });
+  }
+
+  async deleteColumn(id: number, email: string): Promise<DeleteResult> {
+    const column = await this.columnRepository.findOne({ where: { id }, relations: ['dashboard'] });
+
+    if (!column) {
+      throw new NotFoundException();
+    }
+    
+    if (email !== column.dashboard.ownerEmail) {
+      throw new ForbiddenException();
+    }
+
+    return this.columnRepository.delete(id);
   }
 }
