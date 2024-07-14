@@ -6,7 +6,7 @@ import { DashboardEntity } from './entities';
 import { CreateDashboardDto } from './dto';
 import { IsDashboardExistPipe, UserIsNotOwnerPipe } from './pipes';
 
-@Controller('dashboards')
+@Controller('api/dashboards')
 export class DashboardsController {
   constructor (
     private readonly dashboardsService: DashboardsService,

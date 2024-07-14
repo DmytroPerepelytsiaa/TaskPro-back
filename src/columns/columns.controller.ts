@@ -1,6 +1,6 @@
 import { Controller } from '@nestjs/common';
 
-@Controller('columns')
+@Controller('api/columns')
 export class ColumnsController {
 
 }
