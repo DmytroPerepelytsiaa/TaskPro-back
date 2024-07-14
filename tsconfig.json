@@ -22,6 +22,7 @@
       "@users/*": ["src/users/*"],
       "@dashboards/*": ["src/dashboards/*"],
       "@common/*": ["src/common/*"],
+      "@cards/*": ["src/cards/*"],
     }
   }
 }
