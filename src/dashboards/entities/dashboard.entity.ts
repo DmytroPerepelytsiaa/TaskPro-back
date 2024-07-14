@@ -1,7 +1,7 @@
-import { BaseEntity } from 'src/common/entities/base.entity';
+import { ColumnEntity } from '@columns/entities';
+import { BaseEntity } from '@common/entities';
+import { DashboardBackgrounds, DashboardIcons } from '@dashboards/models';
 import { Column, Entity, OneToMany } from 'typeorm';
-import { ColumnEntity } from 'src/columns/entities/column.entity';
-import { DashboardBackgrounds, DashboardIcons } from '../models';
 
 @Entity()
 export class DashboardEntity extends BaseEntity {

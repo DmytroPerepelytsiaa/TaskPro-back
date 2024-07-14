@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException, PipeTransform } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { DashboardEntity } from '@dashboards/entities';
 import { Repository } from 'typeorm';
-import { DashboardEntity } from '../entities/dashboard.entity';
 
 @Injectable()
 export class IsDashboardExistPipe implements PipeTransform {

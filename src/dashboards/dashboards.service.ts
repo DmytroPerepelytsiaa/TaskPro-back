@@ -1,8 +1,8 @@
 import { ForbiddenException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { DeleteResult, Repository } from 'typeorm';
-import { CreateDashboardDto } from './dto/create-dashboard.dto';
-import { DashboardEntity } from './entities/dashboard.entity';
+import { DashboardEntity } from './entities';
+import { CreateDashboardDto } from './dto';
 
 @Injectable()
 export class DashboardsService {

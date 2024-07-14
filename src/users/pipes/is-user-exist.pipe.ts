@@ -1,8 +1,8 @@
 import { ConflictException, Injectable, PipeTransform } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { CreateUserDto } from '@users/dto';
+import { UserEntity } from '@users/entities';
 import { Repository } from 'typeorm';
-import { CreateUserDto } from '../dto/create-user.dto';
-import { UserEntity } from '../entities/user.entity';
 
 @Injectable()
 export class IsUserExistPipe implements PipeTransform {

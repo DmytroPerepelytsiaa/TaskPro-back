@@ -1,5 +1,5 @@
+import { DashboardBackgrounds, DashboardIcons } from '@dashboards/models';
 import { IsDefined, IsEnum, MaxLength } from 'class-validator';
-import { DashboardBackgrounds, DashboardIcons } from '../models';
 
 export class CreateDashboardDto {
   @IsDefined()

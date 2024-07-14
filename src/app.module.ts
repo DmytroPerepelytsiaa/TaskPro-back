@@ -1,13 +1,13 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { JwtModule } from '@nestjs/jwt';
-import { UsersModule } from './users/users.module';
-import { UserEntity } from './users/entities/user.entity';
-import { JWT_SECRET } from './common/constants/jwt';
-import { DashboardEntity } from './dashboards/entities/dashboard.entity';
-import { DashboardsModule } from './dashboards/dashboards.module';
-import { ColumnsModule } from './columns/columns.module';
-import { ColumnEntity } from './columns/entities/column.entity';
+import { JWT_SECRET } from '@common/constants';
+import { UserEntity } from '@users/entities';
+import { UsersModule } from '@users/users.module';
+import { DashboardEntity } from '@dashboards/entities';
+import { DashboardsModule } from '@dashboards/dashboards.module';
+import { ColumnEntity } from '@columns/entities';
+import { ColumnsModule } from '@columns/columns.module';
 
 @Module({
   imports: [

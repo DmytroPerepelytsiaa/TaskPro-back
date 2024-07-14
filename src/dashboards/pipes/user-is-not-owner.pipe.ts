@@ -1,6 +1,6 @@
 import { ForbiddenException, Inject, Injectable, PipeTransform } from '@nestjs/common';
 import { REQUEST } from '@nestjs/core';
-import { DashboardEntity } from '../entities/dashboard.entity';
+import { DashboardEntity } from '@dashboards/entities';
 
 @Injectable()
 export class UserIsNotOwnerPipe implements PipeTransform {

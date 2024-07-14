@@ -1,5 +1,5 @@
+import { PASSWORD_VALIDATION_PATTERN } from '@users/constants';
 import { IsDefined, IsEmail, IsString, Length, Matches, MaxLength } from 'class-validator';
-import { PASSWORD_VALIDATION_PATTERN } from '../constants/password-validation';
 
 export class CreateUserDto {
   @IsDefined()

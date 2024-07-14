@@ -1,11 +1,10 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post, Req, UseGuards } from '@nestjs/common';
-import { AuthGuard } from 'src/common/guards/auth.guard';
+import { AuthGuard } from '@common/guards';
 import { DeleteResult } from 'typeorm';
-import { CreateDashboardDto } from './dto/create-dashboard.dto';
 import { DashboardsService } from './dashboards.service';
-import { DashboardEntity } from './entities/dashboard.entity';
-import { IsDashboardExistPipe } from './pipes/is-dashboard-exist.pipe';
-import { UserIsNotOwnerPipe } from './pipes/user-is-not-owner.pipe';
+import { DashboardEntity } from './entities';
+import { CreateDashboardDto } from './dto';
+import { IsDashboardExistPipe, UserIsNotOwnerPipe } from './pipes';
 
 @Controller('dashboards')
 export class DashboardsController {

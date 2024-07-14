@@ -16,6 +16,12 @@
     "noImplicitAny": false,
     "strictBindCallApply": false,
     "forceConsistentCasingInFileNames": false,
-    "noFallthroughCasesInSwitch": false
+    "noFallthroughCasesInSwitch": false,
+    "paths": {
+      "@columns/*": ["src/columns/*"],
+      "@users/*": ["src/users/*"],
+      "@dashboards/*": ["src/dashboards/*"],
+      "@common/*": ["src/common/*"],
+    }
   }
 }

@@ -1,5 +1,5 @@
-import { BaseEntity } from 'src/common/entities/base.entity';
-import { DashboardEntity } from 'src/dashboards/entities/dashboard.entity';
+import { BaseEntity } from '@common/entities';
+import { DashboardEntity } from '@dashboards/entities';
 import { Column, Entity, ManyToOne } from 'typeorm';
 
 @Entity()
