@@ -18,6 +18,20 @@ export class ColumnsService {
     return this.columnRepository.save({ name: body.name, dashboard });
   }
 
+  async updateColumn(name: string, id: number, email: string): Promise<ColumnEntity> {
+    const column = await this.columnRepository.findOne({ where: { id }, relations: ['dashboard'] });
+
+    if (!column) {
+      throw new NotFoundException();
+    }
+    
+    if (email !== column.dashboard.ownerEmail) {
+      throw new ForbiddenException();
+    }
+
+    column.name = name;
+    return this.columnRepository.save(column);
+  }
   async deleteColumn(id: number, email: string): Promise<DeleteResult> {
     const column = await this.columnRepository.findOne({ where: { id }, relations: ['dashboard'] });
 
