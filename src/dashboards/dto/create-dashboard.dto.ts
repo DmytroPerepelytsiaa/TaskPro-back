@@ -3,7 +3,7 @@ import { IsDefined, IsEnum, MaxLength } from 'class-validator';
 
 export class CreateDashboardDto {
   @IsDefined()
-  @MaxLength(76)
+  @MaxLength(64)
     name: string;
 
   @IsDefined()

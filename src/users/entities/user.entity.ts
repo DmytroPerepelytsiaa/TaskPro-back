@@ -3,7 +3,7 @@ import { Column, Entity } from 'typeorm';
 
 @Entity()
 export class UserEntity extends BaseEntity {
-  @Column({ length: 36 })
+  @Column({ length: 32 })
     name: string;
 
   @Column({ length: 256 })

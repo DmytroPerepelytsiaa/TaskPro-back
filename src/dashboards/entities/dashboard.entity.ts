@@ -5,7 +5,7 @@ import { Column, Entity, OneToMany } from 'typeorm';
 
 @Entity()
 export class DashboardEntity extends BaseEntity {
-  @Column({ length: 120 })
+  @Column({ length: 64 })
     name: string;
 
   @Column({ type: 'enum', enum: DashboardIcons })

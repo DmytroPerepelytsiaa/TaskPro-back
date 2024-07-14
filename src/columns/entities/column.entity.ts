@@ -4,7 +4,7 @@ import { Column, Entity, ManyToOne } from 'typeorm';
 
 @Entity()
 export class ColumnEntity extends BaseEntity {
-  @Column({ length: 72 })
+  @Column({ length: 64 })
     name: string;
   
   @ManyToOne(() => DashboardEntity, (dashboard) => dashboard.columns)
