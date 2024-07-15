@@ -28,12 +28,13 @@ export class Cards1720992129513 implements MigrationInterface {
             name: 'description',
             type: 'varchar',
             length: '180',
+            isNullable: true,
+            default: null,
           },
           {
             name: 'priority',
             type: 'enum',
             enum: Object.values(CardPriority),
-            isNullable: false,
           },
           {
             name: 'deadline',

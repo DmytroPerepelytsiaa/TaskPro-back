@@ -8,14 +8,14 @@ export class CardEntity extends BaseEntity {
   @Column({ length: 64 })
     name: string;
 
-  @Column({ length: 180 })
-    description: string;
+  @Column({ length: 180, nullable: true, default: null })
+    description: string | null;
   
   @Column({ type: 'enum', enum: CardPriority })
     priority: CardPriority;
 
   @Column({ type: 'date' , nullable: true, default: null })
-    deadline: null | Date;
+    deadline: Date | null;
 
   @ManyToOne(() => ColumnEntity, (column) => column.cards)
     column: ColumnEntity;
