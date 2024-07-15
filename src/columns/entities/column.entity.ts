@@ -1,6 +1,7 @@
+import { CardEntity } from '@cards/entities';
 import { BaseEntity } from '@common/entities';
 import { DashboardEntity } from '@dashboards/entities';
-import { Column, Entity, ManyToOne } from 'typeorm';
+import { Column, Entity, ManyToOne, OneToMany } from 'typeorm';
 
 @Entity()
 export class ColumnEntity extends BaseEntity {
@@ -9,4 +10,7 @@ export class ColumnEntity extends BaseEntity {
   
   @ManyToOne(() => DashboardEntity, (dashboard) => dashboard.columns)
     dashboard: DashboardEntity;
+
+  @OneToMany(() => CardEntity, (card) => card.column, { eager: true })
+    cards: CardEntity[];
 }

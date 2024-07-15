@@ -8,6 +8,8 @@ import { DashboardEntity } from '@dashboards/entities';
 import { DashboardsModule } from '@dashboards/dashboards.module';
 import { ColumnEntity } from '@columns/entities';
 import { ColumnsModule } from '@columns/columns.module';
+import { CardsModule } from '@cards/cards.module';
+import { CardEntity } from '@cards/entities';
 
 @Module({
   imports: [
@@ -18,7 +20,7 @@ import { ColumnsModule } from '@columns/columns.module';
       username: 'admin',
       password: 'adminpassword',
       database: 'task-pro',
-      entities: [UserEntity, DashboardEntity, ColumnEntity],
+      entities: [UserEntity, DashboardEntity, ColumnEntity, CardEntity],
       synchronize: false,
     }),
     JwtModule.register({
@@ -29,6 +31,7 @@ import { ColumnsModule } from '@columns/columns.module';
     UsersModule,
     DashboardsModule,
     ColumnsModule,
+    CardsModule,
   ],
   controllers: [],
   providers: [],
