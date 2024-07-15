@@ -1,4 +1,5 @@
 import { CardPriority } from '@cards/models';
+import { Transform } from 'class-transformer';
 import {
   IsDate,
   IsDefined,
@@ -6,29 +7,32 @@ import {
   IsNumber,
   IsOptional,
   IsString,
-  Length,
+  MaxLength,
+  MinLength,
 } from 'class-validator';
 
 export class CreateCardDto {
   @IsDefined()
   @IsString()
-  @Length(64)
-  name: string;
+  @MaxLength(64)
+  @MinLength(2)
+    name: string;
 
   @IsOptional()
   @IsString()
-  @Length(180)
-  description: string | null;
+  @MaxLength(180)
+    description: string | null;
 
   @IsDefined()
   @IsEnum(CardPriority)
-  priority: CardPriority;
+    priority: CardPriority;
 
   @IsOptional()
   @IsDate()
-  deadline: Date | null;
+  @Transform(({ value }) => value ? new Date(value) : null)
+    deadline: Date | null;
 
   @IsDefined()
   @IsNumber()
-  columnId: number;
+    columnId: number;
 }
