@@ -1,7 +1,7 @@
 import { ForbiddenException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ColumnEntity } from '@columns/entities';
-import { Repository } from 'typeorm';
+import { DeleteResult, Repository } from 'typeorm';
 import { CardEntity } from './entities';
 import { CreateCardDto } from './dto/create-card.dto';
 
@@ -25,5 +25,19 @@ export class CardsService {
 
     delete body.columnId;
     return this.cardRepository.save({ ...body, column });
+  }
+
+  async deleteCard(id: number, email: string): Promise<DeleteResult> {
+    const card = await this.cardRepository.findOne({ where: { id }, relations: ['column', 'column.dashboard'] });
+
+    if (!card) {
+      throw new NotFoundException();
+    }
+
+    if (card.column.dashboard.ownerEmail !== email) {
+      throw new ForbiddenException();
+    }
+
+    return this.cardRepository.delete(id);
   }
 }
