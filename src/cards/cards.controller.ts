@@ -1,5 +1,5 @@
 import { AuthGuard } from '@common/guards';
-import { Body, Controller, Delete, Param, Post, Req, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Param, Patch, Post, Req, UseGuards } from '@nestjs/common';
 import { DeleteResult } from 'typeorm';
 import { CreateCardDto } from './dto/create-card.dto';
 import { CardsService } from './cards.service';
@@ -13,6 +13,12 @@ export class CardsController {
   @Post()
   createCard(@Body() body: CreateCardDto, @Req() req): Promise<CardEntity> {
     return this.cardsService.createCard(body, req.user.email);
+  }
+
+  @UseGuards(AuthGuard)
+  @Patch(':id')
+  updateCard(@Body() body: CreateCardDto, @Req() req, @Param('id') id: number): Promise<CardEntity> {
+    return this.cardsService.updateCard(body, id, req.user.email);
   }
 
   @UseGuards(AuthGuard)

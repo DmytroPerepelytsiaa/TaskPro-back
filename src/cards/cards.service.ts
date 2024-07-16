@@ -27,6 +27,26 @@ export class CardsService {
     return this.cardRepository.save({ ...body, column });
   }
 
+  async updateCard(body: CreateCardDto, id: number, email: string): Promise<CardEntity> {
+    const column = await this.columnRepository.findOne({ where: { id: body.columnId }, relations: ['dashboard'] });
+    const card = await this.cardRepository.findOne({ where: { id } });
+
+    if (!column || !card) {
+      throw new NotFoundException();
+    }
+
+    if (column.dashboard.ownerEmail !== email) {
+      throw new ForbiddenException();
+    }
+
+    card.name = body.name;
+    card.description = body.description;
+    card.priority = body.priority;
+    card.deadline = body.deadline;
+
+    return this.cardRepository.save({ ...card, column });
+  }
+
   async deleteCard(id: number, email: string): Promise<DeleteResult> {
     const card = await this.cardRepository.findOne({ where: { id }, relations: ['column', 'column.dashboard'] });
 
