@@ -1,17 +1,15 @@
 
 import { Controller, Post, Body, Get, UseGuards, Req } from '@nestjs/common';
-import { AuthGuard } from 'src/common/guards/auth.guard';
+import { AuthGuard } from '@common/guards';
 import { UsersService } from './users.service';
-import { CreateUserDto } from './dto/create-user.dto';
-import { IsUserExistPipe } from './pipes/is-user-exist.pipe';
-import { LoginUserDto } from './dto/login-user.dto';
-import { ValidateLoginPayloadPipe } from './pipes/validate-login-payload.pipe';
-import { UserEntity } from './entities/user.entity';
+import { CreateUserDto, LoginUserDto } from './dto';
+import { IsUserExistPipe, ValidateLoginPayloadPipe } from './pipes';
+import { UserEntity } from './entities';
 
-@Controller('users')
+@Controller('api/users')
 export class UsersController {
   constructor(
-    private readonly usersService: UsersService,
+    private usersService: UsersService,
   ) {}
 
   @Post('register')

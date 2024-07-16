@@ -1,9 +1,9 @@
 import { Injectable, PipeTransform, UnauthorizedException } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import * as bcrypt from 'bcrypt';
-import { InjectRepository } from '@nestjs/typeorm';
-import { CreateUserDto } from '../dto/create-user.dto';
-import { UserEntity } from '../entities/user.entity';
+import { UserEntity } from '@users/entities';
+import { CreateUserDto } from '@users/dto';
 
 @Injectable()
 export class ValidateLoginPayloadPipe implements PipeTransform {

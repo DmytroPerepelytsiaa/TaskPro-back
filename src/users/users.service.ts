@@ -1,16 +1,16 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { JwtService } from '@nestjs/jwt';
 import { Repository } from 'typeorm';
 import * as bcrypt from 'bcrypt';
-import { JwtService } from '@nestjs/jwt';
-import { UserEntity } from './entities/user.entity';
-import { CreateUserDto } from './dto/create-user.dto';
+import { UserEntity } from './entities';
+import { CreateUserDto } from './dto';
 
 @Injectable()
 export class UsersService {
   constructor (
     @InjectRepository(UserEntity) private userRepository: Repository<UserEntity>,
-    private readonly jwtService: JwtService,
+    private jwtService: JwtService,
   ) {}
 
   async createUser(body: CreateUserDto): Promise<UserEntity> {
