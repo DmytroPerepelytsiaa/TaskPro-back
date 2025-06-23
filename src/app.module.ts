@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { JwtModule } from '@nestjs/jwt';
-import { JWT_SECRET } from '@common/constants';
+import { ConfigModule } from '@nestjs/config';
 import { UserEntity } from '@users/entities';
 import { UsersModule } from '@users/users.module';
 import { DashboardEntity } from '@dashboards/entities';
@@ -13,20 +13,21 @@ import { CardEntity } from '@cards/entities';
 
 @Module({
   imports: [
+    ConfigModule.forRoot({ isGlobal: true }),
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: 'localhost',
-      port: 5432,
-      username: 'admin',
-      password: 'adminpassword',
-      database: 'task-pro',
+      host: process.env.DB_HOST,
+      port: +process.env.DB_PORT,
+      username: process.env.DB_USER,
+      password: process.env.DB_PASS,
+      database: process.env.DB_NAME,
       entities: [UserEntity, DashboardEntity, ColumnEntity, CardEntity],
       synchronize: false,
     }),
     JwtModule.register({
       global: true,
-      secret: JWT_SECRET,
-      signOptions: { expiresIn: '2d' },
+      secret: process.env.JWT_SECRET,
+      signOptions: { expiresIn: process.env.JWT_EXPIRES_IN },
     }),
     UsersModule,
     DashboardsModule,
