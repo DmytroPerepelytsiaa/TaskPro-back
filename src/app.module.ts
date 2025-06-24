@@ -37,14 +37,4 @@ import { CardEntity } from '@cards/entities';
   controllers: [],
   providers: [],
 })
-export class AppModule {
-  constructor() {
-    console.log(process.env.DB_HOST);
-    console.log(process.env.DB_PORT);
-    console.log(process.env.DB_USER);
-    console.log(process.env.DB_PASS);
-    console.log(process.env.DB_NAME);
-    console.log(process.env.JWT_SECRET);
-    console.log(process.env.JWT_EXPIRES_IN);
-  }
-}
+export class AppModule {}
