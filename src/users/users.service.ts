@@ -1,10 +1,10 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { JwtService } from '@nestjs/jwt';
 import { Repository } from 'typeorm';
 import * as bcrypt from 'bcrypt';
 import { UserEntity } from './entities';
-import { CreateUserDto } from './dto';
+import { CreateUserDto, UpdateUserGeneralInfoDto } from './dto';
 
 @Injectable()
 export class UsersService {
@@ -16,6 +16,18 @@ export class UsersService {
   async createUser(body: CreateUserDto): Promise<UserEntity> {
     body.password = await bcrypt.hash(body.password, 10);
     return this.userRepository.save({ ...body });
+  }
+
+  async updateUserGeneralInfo(email: string, body: UpdateUserGeneralInfoDto): Promise<UserEntity> {
+    const user = await this.getUserByEmail(email);
+
+    if (!user) {
+      throw new NotFoundException();
+    }
+
+    user.avatarUrl = body.avatarUrl ?? null;
+    user.name = body.name ?? user.name;
+    return this.userRepository.save(user);
   }
 
   getUserByEmail(email: string): Promise<UserEntity> {
