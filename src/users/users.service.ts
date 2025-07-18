@@ -25,7 +25,7 @@ export class UsersService {
       throw new NotFoundException();
     }
 
-    user.avatarUrl = body.avatarUrl ?? null;
+    user.avatarUrl = body.avatarUrl ?? user.avatarUrl;
     user.name = body.name ?? user.name;
     return this.userRepository.save(user);
   }
