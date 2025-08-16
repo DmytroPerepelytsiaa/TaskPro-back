@@ -2,6 +2,7 @@ import { ForbiddenException, Injectable, NotFoundException } from '@nestjs/commo
 import { InjectRepository } from '@nestjs/typeorm';
 import { ColumnEntity } from '@columns/entities';
 import { DeleteResult, Repository } from 'typeorm';
+
 import { CardEntity } from './entities';
 import { CreateCardDto } from './dto/create-card.dto';
 
